@@ -111,6 +111,8 @@
       <h1>Buttons</h1>
       <button onclick="Telegram.WebApp.expand();">Expand Webview</button>
       <button onclick="toggleMainButton();">Toggle Main Button</button>
+
+      <div id="user-info"></div>
     </main>
     <div id="viewport"></div>
     <div id="viewport-params-size"></div>
@@ -133,6 +135,22 @@
         Telegram.WebApp.showAlert("Main Button was clicked")
       })
       Telegram.WebApp.MainButton.show()
+
+      // 获取用户信息
+      const user = Telegram.WebApp.initDataUnsafe.user
+
+      // 显示用户信息
+      const userInfoDiv = document.getElementById("user-info")
+      if (user) {
+        userInfoDiv.innerHTML = `
+        <p>First Name: ${user.first_name}</p>
+        <p>Last Name: ${user.last_name}</p>
+        <p>Username: ${user.username}</p>
+        <p>Language Code: ${user.language_code}</p>
+    `
+      } else {
+        userInfoDiv.innerHTML = "<p>No user information available.</p>"
+      }
 
       // Function to call showPopup API
       function showPopup() {
